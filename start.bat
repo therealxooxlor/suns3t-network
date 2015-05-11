@@ -36,9 +36,21 @@ ftp -s:C:/Suns3tNetwork/%BrowseToken%.Browseforlink
 :host
 echo what file would you like to put in circulation?
 set /p choice=FILE: 
+set counter=1
+7za a -t7z %counter%-%2bshiped%.7z %file%
+set /p netfilename=NAME: 
+set 2bshiped=%file%
 :zipup
-7za a -t7z %counter%-%%file%.7z %file%
-set counter=counter + 1
+7za a -t7z %counter%-%netfilename%.7z %file%
+set counter=%counter% + 1
+set file=%counter%-%netfilename%.7z
+Delete %file%
 if %counter%==15 goto :zipout
 goto zipup
 :zipout
+rename 15-%netfilename%.7z raw-%netfilename%.ssnfe
+certutil encode raw-%netfilename%.ssnfe %netfilename%.ssnfe
+echo b64 and file compress done.
+echo spitting ssnfe...
+echo %cd%\%netfilename%.ssnfe | clip
+echo Sending into servers...
