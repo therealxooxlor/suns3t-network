@@ -24,17 +24,19 @@ echo NOINSTRUSTIONS!!
 ftp -s:C:/Suns3tNetwork/servers.dat %ipofserver%
 Echo Connected
 :menu
-echo host or browse?
+echo host or browse or PEER?
 set /p hob=H/b: 
 if %hob% == browse goto :browse
 if %hob% == host goto :host
+if %hob% == peer goto :idle
 :browse
 set /p link=LINK: 
 Echo Searching for %link%...
 set BrowseToken=%random%%random%%random%%random%%random%%random%%random%%random%%random%%random%%random%%random%
-echo get %link%.ssnfe %link%.ssnfe  >C:/Suns3tNetwork/%BrowseToken%.Browseforlink
-echo disconnect
+echo put request_%link%_.ssnfe.part file_%link%.ssnfe.part  >C:/Suns3tNetwork/%BrowseToken%.Browseforlink
+echo disconnect >C:/Suns3tNetwork/%BrowseToken%.Browseforlink
 ftp -s:C:/Suns3tNetwork/%BrowseToken%.Browseforlink %ipofserver%
+echo 
 :host
 echo what file would you like to put in circulation?
 set /p choice=FILE: 
@@ -61,3 +63,8 @@ ftp -s:Send%netfilename%toserver.ssnfe.instructions
 echo File sent to server. Access key: %AK%
 pause
 goto :menu
+:idle
+echo 
+echo >%cd%\checkrequest.ssnfe.instructions
+ftp s:%cd%\checkrequest.ssnfe.instructions %serverip%
+
