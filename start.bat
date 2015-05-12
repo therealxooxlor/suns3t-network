@@ -32,7 +32,9 @@ if %hob% == host goto :host
 set /p link=LINK: 
 Echo Searching for %link%...
 set BrowseToken=%random%%random%%random%%random%%random%%random%%random%%random%%random%%random%%random%%random%
-ftp -s:C:/Suns3tNetwork/%BrowseToken%.Browseforlink
+echo get %link%.ssnfe %link%.ssnfe  >C:/Suns3tNetwork/%BrowseToken%.Browseforlink
+echo disconnect
+ftp -s:C:/Suns3tNetwork/%BrowseToken%.Browseforlink %ipofserver%
 :host
 echo what file would you like to put in circulation?
 set /p choice=FILE: 
@@ -54,3 +56,8 @@ echo b64 and file compress done.
 echo spitting ssnfe...
 echo %cd%\%netfilename%.ssnfe | clip
 echo Sending into servers...
+echo Path copyied to your clipboard
+ftp -s:Send%netfilename%toserver.ssnfe.instructions
+echo File sent to server. Access key: %AK%
+pause
+goto :menu
