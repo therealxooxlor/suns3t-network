@@ -64,7 +64,8 @@ echo File sent to server. Access key: %AK%
 pause
 goto :menu
 :idle
-echo 
+echo Check %ssnid% for requests.
+echo >%cd%\ReadyForRequest_%ssnid%.ssnfe
 echo >%cd%\checkrequest.ssnfe.instructions
 ftp s:%cd%\checkrequest.ssnfe.instructions %serverip%
 
