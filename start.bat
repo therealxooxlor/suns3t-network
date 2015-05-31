@@ -64,8 +64,6 @@ echo File sent to server. Access key: %AK%
 pause
 goto :menu
 :idle
-echo Check %ssnid% for requests.
-echo >%cd%\ReadyForRequest_%ssnid%.ssnfe
-echo >%cd%\checkrequest.ssnfe.instructions
-ftp s:%cd%\checkrequest.ssnfe.instructions %serverip%
+echo Peering...
 
+echo setting up network adhoc.
